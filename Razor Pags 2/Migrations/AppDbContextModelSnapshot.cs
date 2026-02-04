@@ -68,7 +68,7 @@ namespace Razor_Pags_2.Migrations
                     b.HasIndex("ClientId")
                         .IsUnique();
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("Razor_Pags_2.Features.Clients.Models.Client", b =>
@@ -102,7 +102,7 @@ namespace Razor_Pags_2.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Client");
+                    b.ToTable("Client", (string)null);
                 });
 
             modelBuilder.Entity("Razor_Pags_2.Features.Clients.Models.Phone", b =>
@@ -127,7 +127,7 @@ namespace Razor_Pags_2.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Phone");
+                    b.ToTable("Phone", (string)null);
                 });
 
             modelBuilder.Entity("Razor_Pags_2.Features.Clients.Models.Address", b =>
