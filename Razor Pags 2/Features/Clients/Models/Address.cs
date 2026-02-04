@@ -6,23 +6,28 @@ namespace Razor_Pags_2.Features.Clients.Models;
 public class Address
 {
     public int Id { get; set; }
-    [MaxLength(100)]
+    [Required]
+    [Column(TypeName = "varchar(100)")]
     public string? Country { get; set; }
-    [MaxLength(100)]
+    [Required]
+    [Column(TypeName = "varchar(100)")]
     public string? Region { get; set; }
-    [MaxLength(100)]
+    [Column(TypeName = "varchar(100)")]
     public string? Area {get; set;}
-    [MaxLength(100)]
+    [Required]
+    [Column(TypeName = "varchar(100)")]
     public string? City { get; set; }
-    [MaxLength(150)]
+    [Required]
+    [Column(TypeName = "varchar(150)")]
     public string? Street { get; set; }
-    [MaxLength(20)]
+    [Required]
+    [Column(TypeName = "varchar(20)")]
     public string? Building {get; set;}
-    [MaxLength(20)]
+    [Column(TypeName = "varchar(20)")]
     public string? Apartment {get; set;}
-    [MaxLength(10)]
+    [Column(TypeName = "varchar(10)")]
     public string? Entrance {get; set;}
-    [MaxLength(20)]
+    [Column(TypeName = "varchar(20)")]
     public string? Room {get; set;}
     public string? Postcode {get; set;}
     
