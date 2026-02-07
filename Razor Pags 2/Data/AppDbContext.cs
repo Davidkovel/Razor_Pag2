@@ -28,5 +28,8 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Client>()
             .HasIndex(b => b.Email)
             .IsUnique();
+        
+        modelBuilder.Entity<ClientFinanceAccount>()
+            .HasKey(cfa => new { cfa.ClientId, cfa.FinanceAccountId });
     }
 }
