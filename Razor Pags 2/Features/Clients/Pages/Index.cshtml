@@ -2,18 +2,76 @@
 @model Razor_Pags_2.Features.Clients.Pages.Index
 
 @{
-    Layout = null;
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Clients";
 }
 
-<!DOCTYPE html>
+<h2>sasasas</h2>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
-</div>
-</body>
-</html>
+<form method="post">
+    @Html.AntiForgeryToken()
+    <div>
+        <label>Surname</label>
+        <input asp-for="Client.Surname"/>
+        <span asp-validation-for="Client.Surname"></span>
+    </div>
+    <div>
+        <label>Patronymic</label>
+        <input asp-for="Client.Patronymic"/>
+        <span asp-validation-for="Client.Patronymic"></span>
+    </div>
+    <div>
+        <label>Email</label>
+        <input asp-for="Client.Email"/>
+        <span asp-validation-for="Client.Email"></span>
+    </div>
+    <div>
+        <label>Birth Date</label>
+        <input asp-for="Client.BirthDate" type="date">
+        <span asp-validation-for="Client.BirthDate"></span>
+    </div>
+    <button type="submit">Add Client</button>
+</form>
+
+
+<hr />
+
+<h3>Clients list</h3>
+
+@if (Model.Clients != null && Model.Clients.Any())
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Surname</th>
+            <th>Firstname</th>
+            <th>Patronymic</th>
+            <th>Email</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var client in Model.Clients)
+        {
+            <tr>
+                <td>@client.Surname</td>
+                <td>@client.Firtname</td>
+                <td>@client.Patronymic</td>
+                <td>@client.Email</td>
+                <td>@client.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No clients yet</p>
+}
+
+
+
+@section Scripts
+{
+    @* <partial name="_ValidationScriptsPartial"></partial> *@
+}

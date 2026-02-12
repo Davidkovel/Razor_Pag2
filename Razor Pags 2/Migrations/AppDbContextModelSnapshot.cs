@@ -90,6 +90,9 @@ namespace Razor_Pags_2.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateOnly>("BirthDate")
+                        .HasColumnType("date");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -127,6 +130,9 @@ namespace Razor_Pags_2.Migrations
                         .HasColumnType("integer");
 
                     b.Property<int>("FinanceAccountId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Id")
                         .HasColumnType("integer");
 
                     b.HasKey("ClientId", "FinanceAccountId");

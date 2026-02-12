@@ -24,10 +24,11 @@ public class Client
     [MaxLength(100)]
     [DataType(DataType.EmailAddress)]
     public string? Email { get; set; }
+    public DateOnly BirthDate { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     // One to many
-    public ICollection<Phone> Phones { get; set; } = new List<Phone>();
+    public ICollection<Phone>? Phones { get; set; } = new List<Phone>();
     // One to one
     public Address? Address { get; set; }
 }
