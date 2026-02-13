@@ -14,7 +14,7 @@ builder.Services.AddRazorPages(options =>
         {
             foreach (var selector in model.Selectors)
             {
-                selector.AttributeRouteModel.Template = 
+                selector.AttributeRouteModel.Template =
                     selector.AttributeRouteModel.Template
                         .Replace("Features/", "")
                         .Replace("/Pages", "");
@@ -47,8 +47,9 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.MapGet("/", context =>
-{
-    return context.Response.WriteAsync("Hello World!");
-});
-
+    {
+        context.Response.Redirect("/Clients");
+        return Task.CompletedTask;
+    }
+);
 app.Run();
