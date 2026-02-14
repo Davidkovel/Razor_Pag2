@@ -4,10 +4,13 @@ using Razor_Pags_2.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages(options =>
 {
     options.RootDirectory = "/";
+    options.Conventions.AddPageRoute("/Pages/Index", "/");
+    options.Conventions.AddPageRoute("/Pages/Privacy", "Privacy");
+    options.Conventions.AddPageRoute("/Clients/Index", "Clients");
+    
     options.Conventions.AddFolderRouteModelConvention(
         "/Features",
         model =>
@@ -45,11 +48,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-app.MapGet("/", context =>
-    {
-        context.Response.Redirect("/Clients");
-        return Task.CompletedTask;
-    }
-);
+//
+// app.MapGet("/", context =>
+//     {
+//         context.Response.Redirect("/Clients");
+//         return Task.CompletedTask;
+//     }
+// );
 app.Run();
