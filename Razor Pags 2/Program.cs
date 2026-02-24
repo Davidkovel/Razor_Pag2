@@ -10,6 +10,7 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AddPageRoute("/Pages/Index", "/");
     options.Conventions.AddPageRoute("/Pages/Privacy", "Privacy");
     options.Conventions.AddPageRoute("/Clients/Index", "Clients");
+    options.Conventions.AddPageRoute("/Clients/Details", "Clients/{id}");
     
     options.Conventions.AddFolderRouteModelConvention(
         "/Features",

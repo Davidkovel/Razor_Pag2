@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Razor_Pags_2.Data;
 using Razor_Pags_2.Features.Clients.Models;
 using Razor_Pags_2.Features.Clients.ViewModels;
@@ -20,7 +21,10 @@ public class Index : PageModel
     public List<Client> Clients { get; set; } = new();
     public void OnGet()
     {
-        Clients = _context.Clients.OrderByDescending(c => c.CreatedAt).ToList();
+        Clients = _context.Clients
+            .Include(c => c.Address) 
+            .OrderByDescending(c => c.CreatedAt)
+            .ToList();
     }
 
     public IActionResult OnPost()
@@ -36,12 +40,27 @@ public class Index : PageModel
         var client = new Client
         {
             Surname = Client.Surname,
+            Firtname = Client.Firtname,
             Patronymic = Client.Patronymic,
             Email = Client.Email,
             BirthDate = Client.BirthDate,
             CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            UpdatedAt = DateTime.UtcNow,
+
+            Address = new Address
+            {
+                Country = Client.Address.Country,
+                Region = Client.Address.Region,
+                City = Client.Address.City,
+                Street = Client.Address.Street,
+                Building = Client.Address.Building,
+                Room = Client.Address.Room,
+                Postcode = Client.Address.Postcode,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            }
         };
+        
         
         _context.Clients.Add(client);
         _context.SaveChanges();

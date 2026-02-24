@@ -1,0 +1,165 @@
+@page
+@using Razor_Pags_2.Features.Clients.Models
+@model Razor_Pags_2.Pages.Details
+
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Client Details</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Client.Id" />
+
+    <fieldset>
+        <legend>Client</legend>
+
+        <div>
+            <label>Surname</label>
+            <input asp-for="Client.Surname" />
+        </div>
+
+        <div>
+            <label>Firstname</label>
+            <input asp-for="Client.Firtname" />
+        </div>
+
+        <div>
+            <label>Patronymic</label>
+            <input asp-for="Client.Patronymic" />
+        </div>
+
+        <div>
+            <label>Email</label>
+            <input asp-for="Client.Email" />
+        </div>
+
+        <div>
+            <label>Birth date</label>
+            <input asp-for="Client.BirthDate" type="date" />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Address</legend>
+
+        <div>
+            <label>Country</label>
+            <input asp-for="Address.Country" />
+        </div>
+
+        <div>
+            <label>Region</label>
+            <input asp-for="Address.Region" />
+        </div>
+
+        <div>
+            <label>City</label>
+            <input asp-for="Address.City" />
+        </div>
+
+        <div>
+            <label>Street</label>
+            <input asp-for="Address.Street" />
+        </div>
+
+        <div>
+            <label>Building</label>
+            <input asp-for="Address.Building" />
+        </div>
+
+        <div>
+            <label>Apartment</label>
+            <input asp-for="Address.Apartment" />
+        </div>
+
+        <div>
+            <label>Room</label>
+            <input asp-for="Address.Room" />
+        </div>
+
+        <div>
+            <label>Postcode</label>
+            <input asp-for="Address.Postcode" />
+        </div>
+    </fieldset>
+
+    <button type="submit"
+            asp-page-handler="Save"
+            asp-route-id="@Model.Client.Id">
+        Save Client
+    </button>
+</form>
+
+<hr />
+
+<h3>Add phone</h3>
+
+<form method="post">
+    <div>
+        <label>Phone number</label>
+        <input asp-for="NewPhone.Number" />
+    </div>
+
+    <div>
+        <label>Country code</label>
+        <select asp-for="NewPhone.CountryCode"
+                asp-items="Html.GetEnumSelectList<CountryCode>()">
+        </select>
+    </div>
+
+    <button type="submit"
+            asp-page-handler="AddPhone"
+            asp-route-id="@Model.Client.Id">
+        Add phone
+    </button>
+</form>
+
+<hr />
+
+<h3>Phones</h3>
+
+@if (Model.Phones.Any())
+{
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Code</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var phone in Model.Phones)
+        {
+            <tr>
+                <td>@phone.Number</td>
+                <td>@phone.CountryCode</td>
+                <td>
+                    <form method="post">
+                        <button asp-page-handler="DeletePhone"
+                                asp-route-phoneId="@phone.Id"
+                                asp-route-id="@Model.Client.Id">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No phones</p>
+}
+
+<hr />
+
+<form method="post">
+    <button asp-page-handler="DeleteClient"
+            asp-route-id="@Model.Client.Id"
+            style="color:red">
+        DELETE CLIENT
+    </button>
+</form>

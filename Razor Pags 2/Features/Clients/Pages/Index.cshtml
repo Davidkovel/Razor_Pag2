@@ -6,7 +6,7 @@
     ViewData["Title"] = "Clients";
 }
 
-<h2>sasasas</h2>
+<h2>Client form</h2>
 
 <form method="post">
     @Html.AntiForgeryToken()
@@ -30,7 +30,56 @@
         <input asp-for="Client.BirthDate" type="date">
         <span asp-validation-for="Client.BirthDate"></span>
     </div>
-    <button type="submit">Add Client</button>
+    <hr />
+    <h3>Address</h3>
+
+    <div>
+        <label>Country</label>
+        <input asp-for="Client.Address.Country" />
+        <span asp-validation-for="Client.Address.Country"></span>
+    </div>
+
+    <div>
+        <label>Region</label>
+        <input asp-for="Client.Address.Region" />
+    </div>
+    
+    <div>
+        <label>City</label>
+        <input asp-for="Client.Address.City" />
+    </div>
+
+    <div>
+        <label>Street</label>
+        <input asp-for="Client.Address.Street" />
+    </div>
+
+    <div>
+        <label>Building</label>
+        <input asp-for="Client.Address.Building" />
+    </div>
+
+    <div>
+        <label>Apartment</label>
+        <input asp-for="Client.Address.Apartment" />
+    </div>
+
+    <div>
+        <label>Entrance</label>
+        <input asp-for="Client.Address.Entrance" />
+    </div>
+
+    <div>
+        <label>Room</label>
+        <input asp-for="Client.Address.Room" />
+    </div>
+
+    <div>
+        <label>Postcode</label>
+        <input asp-for="Client.Address.Postcode" />
+    </div>
+
+    <button type="submit">Save</button>
 </form>
 
 
@@ -47,6 +96,7 @@
             <th>Firstname</th>
             <th>Patronymic</th>
             <th>Email</th>
+            <th>Address</th>
             <th>Created</th>
         </tr>
         </thead>
@@ -58,7 +108,26 @@
                 <td>@client.Firtname</td>
                 <td>@client.Patronymic</td>
                 <td>@client.Email</td>
+                <td>
+                    @if (client.Address != null)
+                    {
+                        <text>
+                            @client.Address.Country,
+                            @client.Address.City,
+                            @client.Address.Street
+                            @client.Address.Building
+                        </text>
+                    }
+                    else
+                    {
+                        <text>—</text>
+                    }
+                </td>
+
                 <td>@client.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>
+                    <a asp-area="" asp-page="/Features/Clients/Pages/Details" asp-route-id="@client.Id">Details</a>
+                </td>
             </tr>
         }
         </tbody>

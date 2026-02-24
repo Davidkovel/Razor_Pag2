@@ -17,4 +17,6 @@ public class ClientViewModel
     public string? Email { get; set; }
     [DataType(DataType.Date)]
     public DateOnly BirthDate { get; set; }
+    [Required]
+    public AddressViewModel? Address { get; set; }
 }
